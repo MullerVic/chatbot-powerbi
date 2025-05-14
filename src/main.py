@@ -1,8 +1,8 @@
-from gpt_analise import analisar_texto
-from powerbi_automacao import obter_dados_powerbi
-from whatsap_bot import enviar_mensagem
-from views.bot_view import iniciar_whatsapp, monitorar_mensagens_loop
-
+#from gpt_analise import analisar_texto
+#from powerbi_automacao import obter_dados_powerbi
+#from whatsap_bot import enviar_mensagem
+from views.bot_view import WhatsAppBot
+from controllers.bot_controller import processar_mensagem
 #def executar_chatbot():
  ##   dados = obter_dados_powerbi()
    # analise = analisar_texto(dados)
@@ -10,6 +10,8 @@ from views.bot_view import iniciar_whatsapp, monitorar_mensagens_loop
 
 
 if __name__ == "__main__":
-    iniciar_whatsapp()
-    monitorar_mensagens_loop()
+    bot = WhatsAppBot()
+    bot.iniciar_whatsapp()
+    bot.monitorar_mensagens_loop()
+
     
