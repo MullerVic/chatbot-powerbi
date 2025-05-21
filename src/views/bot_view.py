@@ -4,6 +4,7 @@ from controllers.bot_controller import processar_mensagem
 from selenium.common.exceptions import NoSuchElementException
 import time
 from util.mensagem_util import enviar_mensagem
+import pyautogui
 
 class WhatsAppBot:
   def __init__(self):
@@ -19,36 +20,31 @@ class WhatsAppBot:
     novas = []
     try:
         # Encontrar conversas com mensagens não lidas (círculo verde)
-        elementos = self.driver.find_elements(By.CLASS_NAME, "_ahlk")  # classe que indica mensagens novas
-        for el in elementos:
-            el.click()
-            time.sleep(2)
-
+      # elementos = self.driver.find_elements(By.CLASS_NAME, "_ahlk")  # classe que indica mensagens novas
+       ##    el.click()
+         ##
             # Encontrar a última mensagem recebida
-            mensagens = self.driver.find_elements(By.CSS_SELECTOR, "div.message-in")
-            ultima_msg = mensagens[-1].text
+           # mensagens = self.driver.find_elements(By.CSS_SELECTOR, "div.message-in")
+#            ultima_msg = mensagens[-1].text
 
             # Pegar o nome do contato
-            nome_contato = self.driver.find_element(By.XPATH, '//header//span[@dir="auto"]').text
+ #           nome_contato = self.driver.find_element(By.XPATH, '//header//span[@dir="auto"]').text
             #Salva o nome/numero no array
-            novas.append((nome_contato, ultima_msg))
+  #          novas.append((nome_contato, ultima_msg))
+      novaMensagem = pyautogui.locateCenterOnScreen('novaMensagem1.png')
+      time.sleep(5)
+      pyautogui.click(novaMensagem[0],novaMensagem[1])
     except NoSuchElementException:
         pass
 
     return novas
 
-  def executar(self):
-        self.iniciar_whatsapp()
-        while True:
-            novas = self.buscar_novas_mensagens()
-            for contato, mensagem in novas:
-                resposta = processar_mensagem(mensagem, contato)
-                self.enviar_mensagem(contato, resposta)
-            time.sleep(5)
-  def monitorar_mensagens_loop(self):
-    while True:
-        contatos_e_mensagens = self.buscar_novas_mensagens() 
-        for contato, mensagem in contatos_e_mensagens:
-            resposta = processar_mensagem(mensagem, contato)
-            enviar_mensagem(contato, resposta)
-        time.sleep(5)
+  #def executar(self):
+   #     self.iniciar_whatsapp()
+    ######   time.sleep(5)
+  #def monitorar_mensagens_loop(self):
+   ##    contatos_e_mensagens = self.buscar_novas_mensagens() 
+     #   for contato, mensagem in contatos_e_mensagens:
+      #      resposta = processar_mensagem(mensagem, contato)
+       #     enviar_mensagem(contato, resposta)
+        # time.sleep(5)
